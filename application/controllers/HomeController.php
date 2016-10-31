@@ -9,16 +9,14 @@ class HomeController extends CI_Controller{
     }
     
     function index(){
-        
-       $datos['users'] = UserModel::all();
+       //Datos Estandar
+       $datos['contenido'] = 'index'; //contiene nombre pagina contenido principal
+       $datos['titulo'] = 'Subasta HOME';
+       //Datos Dinamicos
+       $datos['users'] = UsuarioModel::all();
        
-       $this->load->view('template/partials/header');
-       $this->load->view('template/partials/nav');
-       $this->load->view('front_end/index', $datos);
-       $this->load->view('template/partials/footer');
-       $this->load->view('template/partials/scriptImport');
        
-       //$this->load->view('index', $datos);
-        
+       $this->load->view('template/template_home', $datos);
+       
     }
 }

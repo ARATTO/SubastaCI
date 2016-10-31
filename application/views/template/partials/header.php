@@ -5,12 +5,12 @@
  * Author URL: http://graphberry.com
  * License: http://graphberry.com/pages/license
 -->
-<html lang="en">
+<html lang="es">
     
     <head>
         <meta charset=utf-8>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pluton Theme by BraphBerry.com</title>
+        <title><?php echo $titulo; ?></title>
         <!-- Load Roboto font -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <!-- Load css styles -->
@@ -29,6 +29,6 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php base_url(); ?>public/images/ico/apple-touch-icon-114.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php base_url(); ?>public/images/apple-touch-icon-72.png">
         <link rel="apple-touch-icon-precomposed" href="<?php base_url(); ?>public/images/ico/apple-touch-icon-57.png">
-        <link rel="shortcut icon" href="<?php base_url(); ?>public/images/ico/favicon.ico">
+        <link rel="shortcut icon" href="<?php base_url(); ?>public/images/subasta_ci/subasta_logo.png">
     </head>
 <body>

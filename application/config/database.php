@@ -79,7 +79,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'probando_ci',
+	'database' => 'subasta_ci',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -102,7 +102,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'probando_ci',
+    'database'  => 'subasta_ci',
     'username'  => 'root',
     'password'  => '',
     'charset'   => 'utf8',
