@@ -17,21 +17,22 @@
                     <li><a href="#portfolio">PORTAFOLIO</a></li>
                     <li><a href="#clients">CLIENTES</a></li>
                     <li><a href="#contact">CONTACTO</a></li>
-                    <?php if ($this->session->userdata('login')) { ?>
+                    <?php if (!$this->session->userdata('nombre')) { ?>
                     
-                        <li><a href="#login">LOGIN</a></li>
+                        <li><a href="<?php base_url(); ?>login">LOGIN</a></li>
                         
                     <?php } else { ?>
                         <li>
                             <div class="btn-group" role="group" aria-label="...">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-danger  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <b><?php echo $this->session->userdata('nombre') ?> </b>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
                                         
                                         <li><a href="#login"><b>Perfil</b></a></li>
-                                        <li><a href="#logout"><b>Desloguear</b></a></li>
+                                        <li><a href="<?php base_url(); ?>login/logout"><b>Desloguear</b></a></li>
                                         
                                     </ul>
                                 </div>

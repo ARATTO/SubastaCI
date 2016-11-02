@@ -60,8 +60,11 @@
 
                 <h2><?php echo $user->nombre; ?></h2>
                 <h2><?php echo $user->apellido; ?></h2>
+                
 
             <?php } ?>
+                
+                <h2><?php //echo $users->apellido; ?></h2>
                 
                 
         </div>
