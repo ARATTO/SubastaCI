@@ -25,5 +25,13 @@ class Subasta extends CI_Controller {
 
         $this->load->view('template/template_home', $datos);
     }
+    
+    function subastadetalle(){
+        //Datos Estandar
+        $datos['contenido'] = 'subasta_detalle'; //contiene nombre pagina contenido principal
+        $datos['titulo'] = 'SubastaSV | Subasta #1234';
+
+        $this->load->view('template/template_home', $datos);
+    }
 
 }

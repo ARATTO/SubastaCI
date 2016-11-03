@@ -13,7 +13,7 @@ class Cliente extends CI_Controller {
         //Datos Estandar
         $datos['contenido'] = 'admin/clientes'; //contiene nombre pagina contenido principal
         $datos['titulo'] = 'SubastaSV | Clientes';
-
+        $datos['usuarios'] = UsuarioModel::all();
         $this->load->view('template/template_home', $datos);
         
     }

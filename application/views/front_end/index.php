@@ -161,19 +161,6 @@
 <div class="section primary-section" id="service">
     <div class="container">
         <div class="container">
-
-
-            <?php foreach ($users as $user) { ?>
-
-                <h2><?php echo $user->nombre; ?></h2>
-                <h2><?php echo $user->apellido; ?></h2>
-
-
-            <?php } ?>
-
-            <h2><?php //echo $users->apellido;   ?></h2>
-
-
         </div>
         <!-- Start title section -->
         <div class="title">
