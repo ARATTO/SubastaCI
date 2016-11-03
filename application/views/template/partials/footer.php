@@ -1,34 +1,67 @@
 </section>
-<!-- Newsletter section start -->
-        <div class="section third-section">
-            <div class="container newsletter">
-                <div class="sub-section">
-                    <div class="title clearfix">
-                        <div class="pull-left">
-                            <h3>Newsletter</h3>
-                        </div>
-                    </div>
-                </div>
-                <div id="success-subscribe" class="alert alert-success invisible">
-                    <strong>Well done!</strong>You successfully subscribet to our newsletter.</div>
-                <div class="row-fluid">
-                    <div class="span5">
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                    </div>
-                    <div class="span7">
-                        <form class="inline-form">
-                            <input type="email" name="email" id="nlmail" class="span8" placeholder="Enter your email" required />
-                            <button id="subscribe" class="button button-sp">Subscribe</button>
-                        </form>
-                        <div id="err-subscribe" class="error centered">Please provide valid email address.</div>
-                    </div>
-                </div>
+
+<!-- Contact section start -->
+<div id="contact" class="contact">
+    <div class="section secondary-section">
+        <div class="container">
+            <div class="title">
+                <h1>CONTACTANOS</h1>
+                <p>Estamos 24/7 disponibles para ti.</p>
             </div>
         </div>
-        <!-- Newsletter section end -->
+        
+        <div class="container">
+            <div class="span9 center contact-info">
+                <p>123 Sivar Avenue, 12th,La Campanera,SRB 11000</p>
+                <p class="info-mail">subastasv@uesmail.com</p>
+                <p>+777 777 7</p>
+                <p>+257 777 7</p>
+                <div class="title">
+                    <h3>Redes Sociales</h3>
+                </div>
+            </div>
+            <div class="row-fluid centered">
+                <ul class="social">
+                    <li>
+                        <a href="">
+                            <span class="icon-facebook-circled"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon-twitter-circled"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon-linkedin-circled"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon-pinterest-circled"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon-dribbble-circled"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon-gplus-circled"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact section edn -->
+
 <!-- Footer section start -->
 <div class="footer">
-    <p>&copy; 2013 Theme by <a href="http://www.graphberry.com">GraphBerry</a>, <a href="http://goo.gl/NM84K2">Documentation</a></p>
+    <p>&copy; FIA-UES 2016     <a href="<?= base_url();?>home"> Muerte </a>, <a href="<?= base_url();?>home"> SubastaSV </a></p>
 </div>
 <!-- Footer section end -->
 <!-- ScrollUp button start -->
