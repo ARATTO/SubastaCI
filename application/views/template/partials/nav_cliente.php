@@ -14,11 +14,11 @@
             <div class="nav-collapse collapse pull-right">
                 <ul class="nav" id="top-navigation">
                     <li><a href="<?= base_url(); ?>subasta">SUBASTAS ACTIVAS</a></li>
-                    <li><a href="<?= base_url(); ?>cliente">CLIENTES</a></li>
+                    <li><a href="<?= base_url(); ?>subasta/portafolio">MI PORTAFOLIO</a></li>
                     <?php if (!$this->session->userdata('nombre')) { ?>
-                    
+
                         <li><a href="<?= base_url(); ?>login">LOGIN</a></li>
-                        
+
                     <?php } else { ?>
                         <ul class="nav nav-pills">
                             <li role="presentation" class="dropdown">

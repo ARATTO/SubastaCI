@@ -9,8 +9,7 @@ class Login extends CI_Controller{
     }
     
     function index(){
-       //Datos Estandar
-       //redirect(base_url().'home' ,'refresh');
+       
         $this->load->view('front_end/login');
         
     }
@@ -24,11 +23,10 @@ class Login extends CI_Controller{
         $resultado = $this->log($correo,$password);
         
         if($resultado){
-            redirect(base_url().'/home' ,'refresh');
+            redirect(base_url().'home' ,'refresh');
         }else{
             redirect(base_url(),'refresh');
         }
-        
         
     }
     
@@ -38,12 +36,15 @@ class Login extends CI_Controller{
                                 ->where("password","=",$password)
                                 ->first();
         
+        $tipoUser = TipoUsuarioModel::find($consulta->TipoUsuario_id);
+        
         if(count($consulta) > 0){
             $data = array(
-                'nombre' => $consulta->nombre,           
+                'nombre' => $consulta->nombre, 
+                'tipoUsuario' => $tipoUser->nombre,
             );
             $this->session->set_userdata($data);
-            //$this->set_userdata('correo',$consulta->correo);
+            
             return TRUE;
         }else{
             if($this->check_email($correo)){
@@ -67,7 +68,6 @@ class Login extends CI_Controller{
             return FALSE;
         }
     }
-    
     
     function logout(){
         $this->session->sess_destroy();
