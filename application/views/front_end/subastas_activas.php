@@ -6,8 +6,8 @@
             <h1>SUBASTAS ACTIVAS</h1>
             <p>Catalogo de subastas en linea.</p>
         </div>
-        
-       
+
+
         <ul class="nav nav-pills">
             <li class="filter" data-filter="all">
                 <a href="#noAction">TODO</a>
@@ -26,50 +26,51 @@
         <div id="single-project">
 
             <?php foreach ($subastas as $subasta) { ?>
-
-                <!-- Start details for portfolio project -->
-                <div id="slidingDiv<?= $subasta->id ?>" class="toggleDiv row-fluid single-project">
-                    <div class="span6">
-                        <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project<?= $subasta->id ?>" />
-                    </div>
-                    <div class="span6">
-                        <div class="project-description">
-                            <div class="project-title clearfix">
-                                <?php foreach ($productos as $producto) { ?>
-                                    <?php if ($producto->id == $subasta->Producto_id) { ?>
-                                        <h3><?= $producto->nombre; ?></h3>
-                                    <?php } ?>
-                                <?php } ?>
-                                <span class="show_hide close">
-                                    <i class="icon-cancel"></i>
-                                </span>
-                            </div>
-                            <div class="project-info">
-                                <div>
-                                    <span>Vendedor</span>Some Client Name
-                                </div>
-                                <div>
-                                    <span>Fecha</span><?= $subasta->fechaSubasta; ?>
-                                </div>
-                                <div>
-                                    <span>Lote</span>
-                                    <?php if ($subasta->IsLote == 1) { ?>
-                                        SI </div>
-                                <?php } else { ?>
-                                    NO </div>
-                            <?php } ?>
-                            <div>
-                                <span>Monto Inicial</span> 
-                                <strong><h3>$<?= $subasta->precioSujerido; ?></h3></strong>
-                            </div>
-
+                <form action="<?= base_url(); ?>subasta/subastadetalle/<?= $subasta->id; ?>" method="post" >
+                    <!-- Start details for portfolio project -->
+                    <div id="slidingDiv<?= $subasta->id ?>" class="toggleDiv row-fluid single-project">
+                        <div class="span6">
+                            <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project<?= $subasta->id ?>" />
                         </div>
-                        <p><?= $subasta->descripcion; ?></p>
+                        <div class="span6">
+                            <div class="project-description">
+                                <span class="show_hide close">
+                                        <i class="icon-cancel"></i>
+                                </span>
+                                <div class="project-title clearfix">
+                                    <?php foreach ($productos as $producto) { ?>
+                                        <?php if ($producto->id == $subasta->Producto_id) { ?>
+                                            <button type="submit" class="btn btn-default btn-lg btn-block">
+                                                <strong><?= $producto->nombre; ?></strong>
+                                            </button>
+                                        <?php } ?>
+                                    <?php } ?>
+                                    
+                                </div>
+                                <div class="project-info">
+
+                                    <div>
+                                        <span>Fecha</span><?= $subasta->fechaSubasta; ?>
+                                    </div>
+                                    <div>
+                                        <span>Lote</span>
+                                        <?php if ($subasta->IsLote == 1) { ?>
+                                            SI </div>
+                                    <?php } else { ?>
+                                        NO </div>
+                                <?php } ?>
+                                <div>
+                                    <span>Monto Inicial</span> 
+                                    <strong><h3>$<?= $subasta->precioSujerido; ?></h3></strong>
+                                </div>
+
+                            </div>
+                            <p><?= $subasta->descripcion; ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- End details for portfolio project  -->
-
+                <!-- End details for portfolio project  -->
+            </form>
         <?php } ?>
 
         <!-- End details for portfolio project 9 -->
