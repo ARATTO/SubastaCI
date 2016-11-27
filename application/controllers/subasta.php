@@ -13,7 +13,22 @@ class Subasta extends CI_Controller {
         //Datos Estandar
         $datos['contenido'] = 'subastas_activas'; //contiene nombre pagina contenido principal
         $datos['titulo'] = 'SubastaSV | Subastas';
+        
+        $producto = ProductoModel::all();
+        $subasta = SubastaModel::all();
+        $catalogo_subasta = CatalogoSubastaModel::all();
 
+        $datos['productos'] = $producto;
+        $datos['subastas'] = $subasta;
+        $datos['catalogo_subastas'] = $catalogo_subasta;
+        
+        /*
+        $query = CatalogoSubastaModel::Join('subasta' , 'catalogosubasta.Subasta_id','=','subasta.id')
+                ->select('subasta.descripcion', 'catalogosubasta.*')
+                ->get();
+        $datos['query'] = $query;
+        */
+        
         $this->load->view('template/template_home', $datos);
         
     }
