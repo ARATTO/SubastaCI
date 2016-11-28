@@ -40,6 +40,7 @@ class Login extends CI_Controller{
         
         if(count($consulta) > 0){
             $data = array(
+                'id' => $consulta->id,
                 'nombre' => $consulta->nombre, 
                 'tipoUsuario' => $tipoUser->nombre,
             );

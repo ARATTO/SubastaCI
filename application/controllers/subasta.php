@@ -45,28 +45,42 @@ class Subasta extends CI_Controller {
     }
 
     function subastadetalle() {
-        $idUser = $this->session->userdata('id');
+        
+        
         $idSubasta = $this->uri->segment(3);
+        $this->input->cookie('idSubasta', $idSubasta);
 
-        $PruebaJoin = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
+        $SubastaDetalle = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
                 ->join('catalogosubasta', 'catalogosubasta.Subasta_id', '=', 'subasta.id')
-                ->select('subasta.*', 'producto.*', 'catalogosubasta.*')
+                ->join('usuario', 'catalogosubasta.Usuario_id', '=', 'usuario.id')
+                ->join('inscripcion', 'catalogosubasta.id', '=', 'inscripcion.CatalogoSubasta_id')
+                ->join('tipoproducto', 'tipoproducto.id', '=', 'producto.TipoProducto_id')
+                ->select('subasta.*', 'producto.*', 'catalogosubasta.*','usuario.*', 'inscripcion.*', 
+                        'producto.nombre as nombreProducto',
+                        'inscripcion.Usuario_id as UsuarioInscrito',
+                        'catalogosubasta.Usuario_id as Propietario',
+                        'tipoproducto.nombre as TipoProductoNombre')
+                ->where('subasta.id', $idSubasta)
+                ->first();
+        
+        $Inscritos = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
+                ->join('catalogosubasta', 'catalogosubasta.Subasta_id', '=', 'subasta.id')
+                ->join('usuario', 'catalogosubasta.Usuario_id', '=', 'usuario.id')
+                ->join('inscripcion', 'catalogosubasta.id', '=', 'inscripcion.CatalogoSubasta_id')
+                ->select('inscripcion.*', 
+                        'inscripcion.Usuario_id as UsuarioInscrito')
+                ->where('subasta.id', $idSubasta)
                 ->get();
         
-        /*
-        $PruebaJoin = DB::select( DB::raw("SELECT subasta.* , catalogosubasta.* FROM subasta
-          INNER JOIN catalogosubasta ON catalogosubasta.Subasta_id = subasta.id
-          "));
-        */
-        $datos['PruebaJoin'] = $PruebaJoin;
+        $datos['Inscritos'] = $Inscritos;
+   
+        $datos['SubastaDetalle'] = $SubastaDetalle;
         //Datos Estandar
         $datos['contenido'] = 'subasta_detalle'; //contiene nombre pagina contenido principal
         $datos['titulo'] = 'SubastaSV | Subasta #' . $idSubasta;
 
-        $datos['idSubasta'] = $idSubasta;
-
-
         $this->load->view('template/template_home', $datos);
     }
+    
 
 }
