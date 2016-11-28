@@ -19,7 +19,19 @@ class Subasta extends CI_Controller {
         $producto = ProductoModel::all();
         $subasta = SubastaModel::all();
         $catalogo_subasta = CatalogoSubastaModel::all();
-
+        
+        
+        $Subastas = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
+                ->join('catalogosubasta', 'catalogosubasta.Subasta_id', '=', 'subasta.id')
+                ->join('tipoproducto', 'tipoproducto.id', '=', 'producto.TipoProducto_id')
+                ->select('subasta.*', 'producto.*', 'catalogosubasta.*', 
+                        'producto.nombre as nombreProducto',
+                        'catalogosubasta.Usuario_id as Propietario',
+                        'tipoproducto.nombre as TipoProductoNombre')
+                ->where('catalogosubasta.IsActiva',1)
+                ->get();
+        $datos['CatalogoSubastas'] = $Subastas;
+        
         $datos['productos'] = $producto;
         $datos['subastas'] = $subasta;
         $datos['catalogo_subastas'] = $catalogo_subasta;

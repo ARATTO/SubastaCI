@@ -6,8 +6,6 @@
             <h1>SUBASTAS ACTIVAS</h1>
             <p>Catalogo de subastas en linea.</p>
         </div>
-
-
         <ul class="nav nav-pills">
             <li class="filter" data-filter="all">
                 <a href="#noAction">TODO</a>
@@ -25,27 +23,29 @@
         <!-- Start details for portfolio project  -->
         <div id="single-project">
 
-            <?php foreach ($subastas as $subasta) { ?>
+            <?php foreach ($CatalogoSubastas as $subasta) { ?>
                 <form action="<?= base_url(); ?>subasta/subastadetalle/<?= $subasta->id; ?>" method="post" >
                     <!-- Start details for portfolio project -->
                     <div id="slidingDiv<?= $subasta->id ?>" class="toggleDiv row-fluid single-project">
                         <div class="span6">
-                            <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project<?= $subasta->id ?>" />
+                            <?php if ($subasta->foto) { ?>
+                                <img src="<?= base_url(); ?>public/subasta_ci/producto/<?= $subasta->foto; ?>" alt="project 3" >
+                            <?php } else { ?>
+                                <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project 3" >
+                            <?php } ?>
                         </div>
                         <div class="span6">
                             <div class="project-description">
                                 <span class="show_hide close">
-                                        <i class="icon-cancel"></i>
+                                    <i class="icon-cancel"></i>
                                 </span>
                                 <div class="project-title clearfix">
-                                    <?php foreach ($productos as $producto) { ?>
-                                        <?php if ($producto->id == $subasta->Producto_id) { ?>
+                            
                                             <button type="submit" class="btn btn-default btn-lg btn-block">
-                                                <strong><?= $producto->nombre; ?></strong>
+                                                <strong><?= $subasta->nombreProducto; ?></strong>
                                             </button>
-                                        <?php } ?>
-                                    <?php } ?>
-                                    
+                                       
+
                                 </div>
                                 <div class="project-info">
 
@@ -68,33 +68,33 @@
                             <p><?= $subasta->descripcion; ?></p>
                         </div>
                     </div>
-                </div>
-                <!-- End details for portfolio project  -->
+            </div>
+            <!-- End details for portfolio project  -->
             </form>
         <?php } ?>
 
         <!-- End details for portfolio project 9 -->
         <ul id="portfolio-grid" class="thumbnails row">
-            <?php foreach ($subastas as $subasta) { ?>
+            <?php foreach ($CatalogoSubastas as $subasta) { ?>
                 <li class="span4 mix web">
                     <div class="thumbnail">
-                        <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project<?= $subasta->id ?>">
+                        <?php if ($subasta->foto) { ?>
+                            <img src="<?= base_url(); ?>public/subasta_ci/producto/<?= $subasta->foto; ?>" alt="project 3" >
+                        <?php } else { ?>
+                            <img src="<?= base_url(); ?>public/images/Portfolio01.png" alt="project 3" >
+                        <?php } ?>
                         <a href="#single-project" class="more show_hide" rel="#slidingDiv<?= $subasta->id ?>">
                             <i class="icon-plus"></i>
                         </a>
-                        <?php foreach ($productos as $producto) { ?>
-                            <?php if ($producto->id == $subasta->Producto_id) { ?>
-                                <h3><?= $producto->nombre; ?></h3>
-                            <?php } ?>
-                        <?php } ?>
+                      
+                                <h3><?= $subasta->nombreProducto; ?></h3>
+                           
                         <p><span>Monto Inicial</span> 
                             <strong><h2>$<?= $subasta->precioSujerido; ?></h2></strong></p>
                         <div class="mask"></div>
                     </div>
                 </li>
             <?php } ?>
-
-
         </ul>
     </div>
 </div>
