@@ -19,19 +19,16 @@ class Subasta extends CI_Controller {
         $producto = ProductoModel::all();
         $subasta = SubastaModel::all();
         $catalogo_subasta = CatalogoSubastaModel::all();
-        
-        
+
+
         $Subastas = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
                 ->join('catalogosubasta', 'catalogosubasta.Subasta_id', '=', 'subasta.id')
                 ->join('tipoproducto', 'tipoproducto.id', '=', 'producto.TipoProducto_id')
-                ->select('subasta.*', 'producto.*', 'catalogosubasta.*', 
-                        'producto.nombre as nombreProducto',
-                        'catalogosubasta.Usuario_id as Propietario',
-                        'tipoproducto.nombre as TipoProductoNombre')
-                ->where('catalogosubasta.IsActiva',1)
+                ->select('subasta.*', 'producto.*', 'catalogosubasta.*', 'producto.nombre as nombreProducto', 'catalogosubasta.Usuario_id as Propietario', 'tipoproducto.nombre as TipoProductoNombre')
+                ->where('catalogosubasta.IsActiva', 1)
                 ->get();
         $datos['CatalogoSubastas'] = $Subastas;
-        
+
         $datos['productos'] = $producto;
         $datos['subastas'] = $subasta;
         $datos['catalogo_subastas'] = $catalogo_subasta;
@@ -57,8 +54,8 @@ class Subasta extends CI_Controller {
     }
 
     function subastadetalle() {
-        
-        
+
+
         $idSubasta = $this->uri->segment(3);
         $this->input->cookie('idSubasta', $idSubasta);
 
@@ -67,44 +64,49 @@ class Subasta extends CI_Controller {
                 ->join('usuario', 'catalogosubasta.Usuario_id', '=', 'usuario.id')
                 ->join('inscripcion', 'catalogosubasta.id', '=', 'inscripcion.CatalogoSubasta_id')
                 ->join('tipoproducto', 'tipoproducto.id', '=', 'producto.TipoProducto_id')
-                ->select('subasta.*', 'producto.*', 'catalogosubasta.*','usuario.*', 'inscripcion.*', 
-                        'producto.nombre as nombreProducto',
-                        'inscripcion.Usuario_id as UsuarioInscrito',
-                        'catalogosubasta.Usuario_id as Propietario',
-                        'tipoproducto.nombre as TipoProductoNombre')
+                ->select('subasta.*', 'producto.*', 'catalogosubasta.*', 'usuario.*', 'inscripcion.*', 'producto.nombre as nombreProducto', 'inscripcion.Usuario_id as UsuarioInscrito', 'catalogosubasta.Usuario_id as Propietario', 'tipoproducto.nombre as TipoProductoNombre')
                 ->where('subasta.id', $idSubasta)
                 ->first();
-        
+
         $Inscritos = SubastaModel::join('producto', 'subasta.Producto_id', '=', 'producto.id')
                 ->join('catalogosubasta', 'catalogosubasta.Subasta_id', '=', 'subasta.id')
                 ->join('usuario', 'catalogosubasta.Usuario_id', '=', 'usuario.id')
                 ->join('inscripcion', 'catalogosubasta.id', '=', 'inscripcion.CatalogoSubasta_id')
-                ->select('inscripcion.*', 
-                        'inscripcion.Usuario_id as UsuarioInscrito')
+                ->select('inscripcion.*', 'inscripcion.Usuario_id as UsuarioInscrito')
                 ->where('subasta.id', $idSubasta)
                 ->get();
-        
+
         date_default_timezone_set('America/El_Salvador');
-        
+
         $fechaFinal = new DateTime($SubastaDetalle->fechaFinal);
         $ahora = new DateTime(date('Y-m-d H:i:s'));
+
+        $diferencia = $fechaFinal->diff($ahora);
+        $restante = $diferencia->format('%R %D Dias : %H Horas : %i Minutos : %s Segundos  ');
+
         
-        $diferencia = $fechaFinal->diff($ahora, true);
-        $restante = $diferencia->format('%R%D Dias : %H Horas : %i Minutos');
-        $dias = (int)$diferencia->format('%d');
-        $horas = (int)$diferencia->format('%h');
-        $minutos = (int)$diferencia->format('%i');
-        $segundos = (int)$diferencia->format('%s');
+        $dias = (int) $diferencia->format('%d');
+        $horas = (int) $diferencia->format('%h');
+        $minutos = (int) $diferencia->format('%i');
+        $segundos = (int) $diferencia->format('%s');
         
-        $Sdias = $dias * 24 * 60 *60;
-        $Shoras = $horas * 60 * 60;
-        $Sminutos = $minutos * 60;
-        $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        $sentido = (int) $diferencia->format('%R' . 1);
         
+        if ($sentido > 0) {
+            $Sdias = $dias * 24 * 60 * 60;
+            $Shoras = $horas * 60 * 60;
+            $Sminutos = $minutos * 60;
+            $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        }else{
+            $Ssegundos = -1;
+        }
+
+
+
         $datos['segundos'] = $Ssegundos;
         $datos['restante'] = $restante;
         $datos['Inscritos'] = $Inscritos;
-   
+
         $datos['SubastaDetalle'] = $SubastaDetalle;
         //Datos Estandar
         $datos['contenido'] = 'subasta_detalle'; //contiene nombre pagina contenido principal
@@ -112,6 +114,5 @@ class Subasta extends CI_Controller {
 
         $this->load->view('template/template_home', $datos);
     }
-    
-    
+
 }

@@ -250,7 +250,9 @@
     function updateReloj()
     {
         document.getElementById('CuentaAtras').innerHTML = "Redireccionando en "+totalTiempo;
- 
+        if(totalTiempo==-1){
+            alert("Subasta Finalizada");
+        }
         if(totalTiempo==0)
         {
             //window.location=url;

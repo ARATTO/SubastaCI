@@ -23,17 +23,22 @@ class Oferta extends CI_Controller {
         $fechaFinal = new DateTime($subasta->fechaFinal);
         $ahora = new DateTime(date('Y-m-d H:i:s'));
         
-        $diferencia = $fechaFinal->diff($ahora, true);
+        $diferencia = $ahora->diff($fechaFinal);
 
-        $dias = (int)$diferencia->format('%d');
+        $dias = (int)$diferencia->format('%R%d');
         $horas = (int)$diferencia->format('%h');
         $minutos = (int)$diferencia->format('%i');
         $segundos = (int)$diferencia->format('%s');
         
-        $Sdias = $dias * 24 * 60 *60;
-        $Shoras = $horas * 60 * 60;
-        $Sminutos = $minutos * 60;
-        $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        $sentido = (int) $diferencia->format('%R' . 1);
+        if ($sentido > 0) {
+            $Sdias = $dias * 24 * 60 * 60;
+            $Shoras = $horas * 60 * 60;
+            $Sminutos = $minutos * 60;
+            $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        }else{
+            $Ssegundos = -1;
+        }
         /*
         
         $fechaInicial = $subasta->fechaSubasta;
@@ -49,8 +54,6 @@ class Oferta extends CI_Controller {
             //Queda tiempo 1
             $ACTIVA = 1;
         }
-
-
 
         //Datos Estandar
 
@@ -89,17 +92,22 @@ class Oferta extends CI_Controller {
         $fechaFinal = new DateTime($subasta->fechaFinal);
         $ahora = new DateTime(date('Y-m-d H:i:s'));
         
-        $diferencia = $fechaFinal->diff($ahora, true);
+        $diferencia = $ahora->diff($fechaFinal);
 
-        $dias = (int)$diferencia->format('%d');
+        $dias = (int)$diferencia->format('%R%d');
         $horas = (int)$diferencia->format('%h');
         $minutos = (int)$diferencia->format('%i');
         $segundos = (int)$diferencia->format('%s');
         
-        $Sdias = $dias * 24 * 60 *60;
-        $Shoras = $horas * 60 * 60;
-        $Sminutos = $minutos * 60;
-        $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        $sentido = (int) $diferencia->format('%R' . 1);
+        if ($sentido > 0) {
+            $Sdias = $dias * 24 * 60 * 60;
+            $Shoras = $horas * 60 * 60;
+            $Sminutos = $minutos * 60;
+            $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        }else{
+            $Ssegundos = -1;
+        }
         /*
         
         $fechaInicial = $subasta->fechaSubasta;
