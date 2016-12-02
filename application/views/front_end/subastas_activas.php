@@ -40,11 +40,15 @@
                                     <i class="icon-cancel"></i>
                                 </span>
                                 <div class="project-title clearfix">
-                            
-                                            <button type="submit" class="btn btn-default btn-lg btn-block">
-                                                <strong><?= $subasta->nombreProducto; ?></strong>
-                                            </button>
-                                       
+                                    <?php if ($subasta->FINALIZADA == 0) { ?>
+                                        <button type="submit" class="btn btn-default btn-lg btn-block">
+                                            <strong><?= $subasta->nombreProducto; ?></strong>
+                                        </button>
+                                    <?php } else { ?>
+                                        <button type="submit" class="btn btn-danger btn-lg btn-block" disabled>
+                                            <strong>FINALIZADA</strong>
+                                        </button>
+                                    <?php } ?>
 
                                 </div>
                                 <div class="project-info">
@@ -63,6 +67,12 @@
                                     <span>Monto Inicial</span> 
                                     <strong><h3>$<?= $subasta->precioSujerido; ?></h3></strong>
                                 </div>
+                                <?php if ($subasta->FINALIZADA == 1) { ?>
+                                    <div>
+                                        <span>Final</span> 
+                                        <strong><h3>$<?= $subasta->precioActual; ?></h3></strong>
+                                    </div>
+                                <?php } ?>
 
                             </div>
                             <p><?= $subasta->descripcion; ?></p>
@@ -86,9 +96,9 @@
                         <a href="#single-project" class="more show_hide" rel="#slidingDiv<?= $subasta->id ?>">
                             <i class="icon-plus"></i>
                         </a>
-                      
-                                <h3><?= $subasta->nombreProducto; ?></h3>
-                           
+
+                        <h3><?= $subasta->nombreProducto; ?></h3>
+
                         <p><span>Monto Inicial</span> 
                             <strong><h2>$<?= $subasta->precioSujerido; ?></h2></strong></p>
                         <div class="mask"></div>

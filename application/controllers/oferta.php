@@ -116,7 +116,7 @@ class Oferta extends CI_Controller {
         $minutos = (strtotime($fechaFinal));
          */
         
-        if ($Ssegundos == 0 ) {
+        if ($Ssegundos == -1 ) {
             //Temrino Subasta 0
             $subasta->FINALIZADA = 1;
             $subasta->save();

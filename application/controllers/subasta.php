@@ -81,7 +81,7 @@ class Subasta extends CI_Controller {
         $fechaFinal = new DateTime($SubastaDetalle->fechaFinal);
         $ahora = new DateTime(date('Y-m-d H:i:s'));
 
-        $diferencia = $fechaFinal->diff($ahora);
+        $diferencia = $ahora->diff($fechaFinal);
         $restante = $diferencia->format('%R %D Dias : %H Horas : %i Minutos : %s Segundos  ');
 
         
@@ -100,9 +100,20 @@ class Subasta extends CI_Controller {
         }else{
             $Ssegundos = -1;
         }
+        
+        
+        if ($Ssegundos == -1 ) {
+            //Temrino Subasta 0
+            $subasta = SubastaModel::find($idSubasta);
+            $subasta->FINALIZADA = 1;
+            $subasta->save();
+            
+            redirect(base_url().'subasta' ,'refresh');
+            
+        } 
 
-
-
+        
+        
         $datos['segundos'] = $Ssegundos;
         $datos['restante'] = $restante;
         $datos['Inscritos'] = $Inscritos;
