@@ -8,7 +8,10 @@
             <!-- Section's title goes here -->
             <p>Detalle de Subasta.</p>
             <!--Simple description for section goes here. -->
-
+            <input type="hidden" id="segundos" value="<?= $segundos ?>">
+            <input type="hidden" id="restante" value="<?= $restante ?>">
+            <?= $restante ?>
+            <?= $segundos ?>
         </div>
         <?php if ($Inscritos) { ?>
             <?php foreach ($Inscritos as $i) { ?>
@@ -34,11 +37,17 @@
                                                 <span>Monto Inicial</span> 
                                                 <span><h2><strong>$<?= $SubastaDetalle->precioSujerido; ?></strong></h2></span>
                                             </div>
+                                            <div class="row-margin">
+                                                <span>Capacidad Pago</span> 
+                                                <span><h2><strong>$<?= $SubastaDetalle->capacidadPago; ?></strong></h2></span>
+                                            </div>
                                         </div>
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" method="POST" action="<?= base_url(); ?>oferta/HacerOferta">
+                                            <input type="hidden" name="idSubasta" value="<?= $SubastaDetalle->id; ?>">
+                                            <input type="hidden" name="idUsuario" value="<?= $this->session->userdata('id'); ?>">
                                             <div class="col-xs-12 form-group">
                                                 <div class="row-margin">
-                                                    <span><h2><strong><input type="number" class="form-control" id="exampleInputAmount" placeholder="Ofertar"></strong></h2></span>
+                                                    <span><h2><strong><input type="number" class="form-control" name="oferta" id="oferta" placeholder="Ofertar" value="<?= $SubastaDetalle->precioActual; ?>" min="<?= $SubastaDetalle->precioActual; ?>" max="<?= $SubastaDetalle->capacidadPago; ?>"></strong></h2></span>
                                                 </div>
                                                 <div class="input-group col-xs-12">
                                                     <div class="input-group-addon">
@@ -61,6 +70,8 @@
                                             <div class="project-info">
                                                 <div>
                                                     <span>Fecha</span><strong><?= $SubastaDetalle->fechaSubasta; ?></strong></div>
+                                                <div>
+                                                    <span>Tiempo</span><strong id="CuentaAtras"></strong></div>
                                                 <div>
                                                     <span>Lote</span>
                                                     <?php if ($SubastaDetalle->IsLote == 1) { ?>
@@ -226,3 +237,32 @@
 </div>
 </div>
 <!-- Service section end -->
+
+<script language="JavaScript">
+ 
+    /* Determinamos el tiempo total en segundos */
+    //var totalTiempo=5;
+    var totalTiempo = document.getElementById('segundos').value();
+    var restante = document.getElementById('restante').value();
+    /* Determinamos la url donde redireccionar */
+    
+ 
+    function updateReloj()
+    {
+        document.getElementById('CuentaAtras').innerHTML = "Redireccionando en "+totalTiempo;
+ 
+        if(totalTiempo==0)
+        {
+            //window.location=url;
+            location.reload();
+        }else{
+            /* Restamos un segundo al tiempo restante */
+            totalTiempo-=1;
+            /* Ejecutamos nuevamente la función al pasar 1000 milisegundos (1 segundo) */
+            setTimeout("updateReloj()",1000);
+        }
+    }
+ 
+    window.onload=updateReloj;
+ 
+    </script>

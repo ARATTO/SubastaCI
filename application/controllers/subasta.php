@@ -84,6 +84,25 @@ class Subasta extends CI_Controller {
                 ->where('subasta.id', $idSubasta)
                 ->get();
         
+        date_default_timezone_set('America/El_Salvador');
+        
+        $fechaFinal = new DateTime($SubastaDetalle->fechaFinal);
+        $ahora = new DateTime(date('Y-m-d H:i:s'));
+        
+        $diferencia = $fechaFinal->diff($ahora, true);
+        $restante = $diferencia->format('%R%D Dias : %H Horas : %i Minutos');
+        $dias = (int)$diferencia->format('%d');
+        $horas = (int)$diferencia->format('%h');
+        $minutos = (int)$diferencia->format('%i');
+        $segundos = (int)$diferencia->format('%s');
+        
+        $Sdias = $dias * 24 * 60 *60;
+        $Shoras = $horas * 60 * 60;
+        $Sminutos = $minutos * 60;
+        $Ssegundos = $Sdias + $Shoras + $Sminutos + $segundos;
+        
+        $datos['segundos'] = $Ssegundos;
+        $datos['restante'] = $restante;
         $datos['Inscritos'] = $Inscritos;
    
         $datos['SubastaDetalle'] = $SubastaDetalle;
@@ -94,5 +113,5 @@ class Subasta extends CI_Controller {
         $this->load->view('template/template_home', $datos);
     }
     
-
+    
 }
