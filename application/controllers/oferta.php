@@ -39,6 +39,16 @@ class Oferta extends CI_Controller {
         }else{
             $Ssegundos = -1;
         }
+        
+        if ($Ssegundos == -1 ) {
+            //Temrino Subasta 0
+            $subasta = SubastaModel::find($idSubasta);
+            $subasta->FINALIZADA = 1;
+            $subasta->save();
+            
+
+            
+        } 
         /*
         
         $fechaInicial = $subasta->fechaSubasta;
@@ -118,8 +128,12 @@ class Oferta extends CI_Controller {
         
         if ($Ssegundos == -1 ) {
             //Temrino Subasta 0
+            $subasta = SubastaModel::find($idSubasta);
             $subasta->FINALIZADA = 1;
             $subasta->save();
+            
+            redirect(base_url().'subasta' ,'refresh');
+            
         } 
         
   

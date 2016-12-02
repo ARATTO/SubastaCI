@@ -8,10 +8,9 @@
             <!-- Section's title goes here -->
             <p>Detalle de Subasta.</p>
             <!--Simple description for section goes here. -->
-            <input type="hidden" id="segundos" value="<?= $segundos ?>">
-            <input type="hidden" id="restante" value="<?= $restante ?>">
+            
             <?= $restante ?>
-            <?= $segundos ?>
+         
         </div>
         <?php if ($Inscritos) { ?>
             <?php foreach ($Inscritos as $i) { ?>
@@ -237,19 +236,22 @@
 </div>
 </div>
 <!-- Service section end -->
+<input type="hidden" id="segundos" value="<?= $segundos ?>">
+<input type="hidden" id="restante" value="<?= $restante ?>">
 
 <script language="JavaScript">
  
     /* Determinamos el tiempo total en segundos */
     //var totalTiempo=5;
-    var totalTiempo = document.getElementById('segundos').value();
-    var restante = document.getElementById('restante').value();
+    var totalTiempo = document.getElementById('segundos').value;
+
+    var restante = document.getElementById('restante').value;
     /* Determinamos la url donde redireccionar */
     
  
     function updateReloj()
     {
-        document.getElementById('CuentaAtras').innerHTML = "Redireccionando en "+totalTiempo;
+        document.getElementById('CuentaAtras').innerHTML = "Termina en "+totalTiempo;
         if(totalTiempo==-1){
             alert("Subasta Finalizada");
         }
